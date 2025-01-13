@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reprezentativni Sajt</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(13, 110, 253, 0.8);
+
+        }
+
+        /*preloader */
+        .preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(13, 110, 253, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .preloader-logo-wrapper {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .preloader-logo {
+            width: 70px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .preloader-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+        }
+
+        .square {
+            display: flex;
+            /* Bela boja */
+            opacity: 0;
+            /* Sakriveno na početku */
+            transform: translate(1000px, -200px);
+            /* Početna pozicija */
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            transition: opacity 0.5s ease-in, transform 0.5s ease, all 0.3s ease;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2), -4px -4px 10px rgba(255, 255, 255, 0.8);
+            background-color: #ffffff74;
+
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1/1;
+            margin: 0 !important;
+        }
+
+        .square.show {
+            opacity: 1;
+            transform: translate(0, 0);
+            /* Prikazuje na svojoj poziciji */
+        }
+
+        .square:hover {
+            transform: scale(1.05);
+            background-color: #f8f9fa;
+        }
+
+
+        /*prelaoder end */
+
+        .bg-primary {
+            background-color: #0d6efd;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+            height: 100%;
+        }
+
+        .flexy {
+            display: flex;
+        }
+
+        .social {
+            width: 95%;
+        }
+
+        .main-content {
+            background-color: #0d6efd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sidebar-logo {
+            max-width: 70px;
+        }
+
+        .sidebar-logo img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .name {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .name h3 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .moto {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .nav-social-wrapper {
+
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.8rem;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex-grow: 1;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 0.2rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+            font-size: 1.2rem;
+        }
+
+        .nav-link:hover {
+            background-color: #495057;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        .social-icons a {
+            display: block;
+            margin-top: 0.5rem;
+            color: white;
+            font-size: 2rem;
+            transition: transform 0.3s ease-in-out;
+            padding: 0 0.5rem;
+
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #ffc107;
+        }
+
+        .cta-buttons {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cta-buttons .btn {
+            flex: 1 1 calc(50% - 0.5rem);
+            min-width: 150px;
+        }
+
+        .grid-wrapper {
+            width: 100%;
+            margin-top: 5px;
+            max-width: 100vh;
+            height: 100%;
+            max-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .preloader-logo {
+                width: 120px;
+            }
+        }
+
+
+
+        @media (max-width: 768px) {
+            .name h3 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (min-aspect-ratio: 1/1) {
+            .bg-primary {
+                width: calc(100vw - 100vh);
+                height: 100%;
+
+            }
+
+            .main-content {
+                width: 100vh;
+                height: 100%;
+            }
+
+            .grid-wrapper {
+                width: 100vh;
+                height: 100vh;
+            }
+        }
+
+        @media (max-aspect-ratio: 1/1) {
+            .bg-primary {
+                width: 100%;
+                height: calc(100vh - 100vw);
+
+            }
+
+            .main-content {
+                width: 100vw;
+                height: 100vw;
+            }
+
+            .grid-wrapper {
+                width: 100vw;
+                height: 100vw;
+            }
+        }
+
+        /*Doddaci csss odavde*/
+        .group-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            /* Prostor unutar kvadrata */
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .group-content h4 {
+            font-size: clamp(0.8rem, 1.7vw, 1.5rem);
+            /* Prilagođavanje veličine naslova za sve rezolucije */
+            margin-top: 0;
+            color: white;
+            padding: 0;
+            font-weight: 500;
+        }
+
+        .group-content .icon {
+            font-size: clamp(1rem, 2vw, 2rem);
+            /* Ikonica skalirana prema rezoluciji */
+            margin: 0;
+            padding: 0;
+        }
+
+        .group-content p {
+            font-size: clamp(0.7rem, 1.2vw, 1.2rem);
+            /* Tekst skaliran za čitljivost */
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+
+
+        @media (orientation: landscape) {
+
+
+
+
+            .group-content {
+                padding: 3%;
+            }
+        }
+
+        @media (orientation: portrait) {
+
+
+            .group-content {
+                padding: 5%;
+            }
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Tamna pozadina */
+            border-radius: 10px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .overlay.hidden {
+            display: none;
+            /* Skriven modal */
+        }
+
+        .overlay-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            max-width: inherit;
+            /* Ista širina kao grid-wrapper */
+        }
+
+        .grid-wrapper {
+            position: relative;
+            /* Važno da postavimo relativni položaj grida */
+        }
+
+        .close-overlay {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Poluprozirna crna pozadina */
+            border: none;
+            border-radius: 50%;
+            /* Kružno dugme */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            /* Dodajemo glatke tranzicije */
+        }
+
+        .close-overlay i {
+            font-size: 1.4rem;
+            /* Veličina ikone */
+            color: white;
+            transition: color 0.3s ease;
+            /* Animacija promena boje */
+        }
+
+        .close-overlay:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Bela pozadina prilikom hover-a */
+            transform: scale(1.1);
+            /* Blago uvećanje dugmeta */
+        }
+
+        .close-overlay:hover i {
+            color: black;
+            /* Crna ikona na beloj pozadini */
+        }
+
+        @media (max-width: 768px) {
+            .close-overlay {
+                width: 40px;
+                height: 40px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .close-overlay i {
+                font-size: 2.2rem;
+                /* Veća ikonica na mobilnim uređajima */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <!-- Logo u gornjem levom uglu -->
+        <div class="preloader-logo-wrapper">
+            <img src="/images/logo.jpeg" alt="Logo" class="preloader-logo">
+        </div>
+
+        <!-- Grid sa kvadratima -->
+    </div>
+
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <!-- Sidebar -->
+            <div class="col-12 col-lg-4 bg-primary sticky-top">
+                <!-- Sidebar Header -->
+                <div class="flexy">
+                    <div class="social">
+                        <div class="sidebar-header">
+                            <div class="sidebar-logo">
+                                <img src="/images/logo.jpeg" alt="Logo" class="img-fluid rounded">
+                            </div>
+                            <div class="name">
+                                <h3>EllCo.rs</h3>
+                            </div>
+                        </div>
+                        <div class="moto text-center">
+                            "Vaše rešenje za bolji web!"
+                        </div>
+
+                        <!-- Navigacija i socijalne ikonice zajedno -->
+                        <div class="nav-social-wrapper">
+                            <!-- Navigacija -->
+                            <nav class="nav">
+                                <a href="#home" class="nav-link">Početna</a>
+                                <a href="#about" class="nav-link">O nama</a>
+                                <a href="#services" class="nav-link">Usluge</a>
+                                <a href="#reference" class="nav-link">Reference</a>
+                                <a href="#contact" class="nav-link">Kontakt</a>
+                                <a href="#faq" class="nav-link">FAQ</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="social-right">
+
+
+                        <!-- Socijalne ikonice -->
+                        <div class="social-icons">
+                            <a href="#" class="fab fa-facebook"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-tiktok"></a>
+                            <a href="#" class="fas fa-phone-alt"></a> <!-- Ikonica za telefon -->
+                            <a href="#" class="fab fa-viber"></a> <!-- Ikonica za Viber -->
+                            <a href="#" class="fab fa-whatsapp"></a> <!-- Ikonica za WhatsApp -->
+                            <a href="#" class="fab fa-facebook-messenger"></a> <!-- Ikonica za Messenger -->
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- CTA Buttons -->
+                <div class="cta-buttons mt-4 d-flex gap-2">
+                    <button class="btn btn-warning flex-grow-1">Zakaži konsultaciju</button>
+                    <button class="btn btn-outline-light flex-grow-1">Kontaktiraj nas</button>
+                </div>
+            </div>
+
+            <!-- Glavni deo sa gridom -->
+            <div class="col-12 col-lg-8 main-content">
+                <div class="grid-wrapper">
+                    <div class="grid">
+                        <div class="square">
+                            <!-- 1. Moda i lepota -->
+                            <div class="group-content">
+                                <h4>Moda i Lepota</h4>
+                                <div class="icon">
+                                    <i class="fas fa-cut"></i>
+                                </div>
+                                <p>Usluge friziranja, kozmetički tretmani i nega tela.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 2. Lokalne prodavnice i proizvođači -->
+                            <div class="group-content">
+                                <h4>Lokalni Proizvodi</h4>
+                                <div class="icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <p>Butici, parfimerije i prodavnice domaćih proizvoda.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 3. Zanatlije i stručne usluge -->
+                            <div class="group-content">
+                                <h4>Zanatlije i Usluge</h4>
+                                <div class="icon">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <p>Popravke, električarske i bravarske usluge.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 4. Ugostiteljstvo i smeštaj -->
+                            <div class="group-content">
+                                <h4>Smeštaj i Ugostiteljstvo</h4>
+                                <div class="icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <p>Hoteli, apartmani, restorani i ketering.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 5. Turističke i event agencije -->
+                            <div class="group-content">
+                                <h4>Putovanja i Dogodci</h4>
+                                <div class="icon">
+                                    <i class="fas fa-plane-departure"></i>
+                                </div>
+                                <p>Organizacija putovanja i događaja.</p>
+
+                            </div>
+
+                        </div>
+                        <div class="square">
+                            <!-- 6. Edukacija i kultura -->
+                            <div class="group-content">
+                                <h4>Edukacija i Kultura</h4>
+                                <div class="icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <p>Škole jezika, kursevi i kulturne ustanove.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 7. Automobilske usluge i prodaja -->
+                            <div class="group-content">
+                                <h4>Auto Usluge</h4>
+                                <div class="icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <p>Servisi, auto-placevi i perionice.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 8. Usluge za kućne ljubimce -->
+                            <div class="group-content">
+                                <h4>Kućni Ljubimci</h4>
+                                <div class="icon">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <p>Veterinarske ambulante i prodavnice hrane za ljubimce.</p>
+
+                            </div>
+                        </div>
+                        <div class="square">
+                            <!-- 9. Sport i rekreacija -->
+                            <div class="group-content">
+                                <h4>Sport i Rekreacija</h4>
+                                <div class="icon">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                                <p>Teretane, sportski klubovi i bazeni.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="grid-overlay" class="overlay hidden">
+                        <div class="overlay-content">
+                            <button class="close-overlay">
+                                <i class="fas fa-times"></i> <!-- Ikonica za zatvaranje -->
+                            </button>
+                            <h2>Detalji o usluzi</h2>
+                            <p>Ovo je prozor koji se prikazuje iznad grida sa dimenzijama grida.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader'); // Preloader sekcija
+            const mainContent = document.querySelector('.main-content'); // Glavni sadržaj sa gridom
+            const sidebar = document.querySelector('.bg-primary'); // Sidebar
+            const squares = document.querySelectorAll('.grid .square'); // Kvadrati iz grida
+
+            sidebar.style.opacity = '0'; // Sakrivamo sidebar
+
+            const order = [8, 7, 6, 3, 0, 1, 2, 5, 4]; // Redosled zmije
+            let delay = 0;
+
+            // Prikaz kvadrata jedan po jedan
+            order.forEach((index) => {
+                setTimeout(() => {
+                    const square = squares[index];
+                    if (square) {
+                        square.classList.add('show'); // Prikaz kvadrata
+                    }
+                }, delay);
+                delay += 300; // Zakašnjenje između prikaza kvadrata
+            });
+
+            // Prikaz sajta nakon završetka preloadera
+            setTimeout(() => {
+                preloader.style.opacity = '0'; // Nestanak preloadera
+                setTimeout(() => {
+                    preloader.style.display = 'none'; // Potpuno uklanjanje preloadera
+                    mainContent.style.opacity = '1'; // Prikazivanje glavnog dela
+                    sidebar.style.opacity = '1'; // Prikazivanje sidebar-a
+                }, 100);
+            }, delay + 100);
+        });
+        document.querySelectorAll('.square').forEach((square) => {
+            square.addEventListener('click', () => {
+                const overlay = document.getElementById('grid-overlay');
+                overlay.classList.remove('hidden'); // Prikazujemo overlay
+            });
+        });
+
+        document.querySelector('.close-overlay').addEventListener('click', () => {
+            const overlay = document.getElementById('grid-overlay');
+            overlay.classList.add('hidden'); // Zatvaramo overlay
+        });
+
+        // Zatvaranje prozora kada se klikne izvan sadržaja
+        document.getElementById('grid-overlay').addEventListener('click', (event) => {
+            if (event.target === event.currentTarget) {
+                event.currentTarget.classList.add('hidden');
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>
