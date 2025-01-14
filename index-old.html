@@ -425,114 +425,6 @@
                 /* Veća ikonica na mobilnim uređajima */
             }
         }
-
-        /*#########*/
-
-        @media (max-aspect-ratio: 1/1) {
-
-
-            .nav-social-wrapper {
-                display: block;
-                height: auto;
-            }
-
-            .social-icons {
-                flex-direction: row;
-                padding: 0 !important;
-                align-items: center;
-                margin: 0 !important;
-                height: auto;
-                width: auto;
-
-            }
-        }
-
-        /* Skrivanje navigacije na manjim ekranima */
-        @media (max-aspect-ratio: 1/1) {
-            .nav {
-                display: none;
-                /* Sakrij navigaciju */
-                transition: all 0.3s ease;
-            }
-
-            .nav.expanded {
-                display: flex;
-                /* Prikaz navigacije kada je expanded */
-            }
-
-            .toggle-nav {
-                display: block;
-                /* Dugme za toggling navigacije */
-                margin-top: 10px;
-                background-color: #007bff;
-                color: white;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        }
-
-        /* Sakrivanje toggle dugmeta na desktop verziji */
-        @media (min-width: 768px) {
-            .toggle-nav {
-                display: none;
-                /* Sakrivanje na širim ekranima */
-            }
-        }
-
-        /* Stilizovanje toggle buttona za mobilne uređaje */
-        .toggle-nav {
-            background-color: #007bff;
-            /* Plava boja pozadine */
-            color: white;
-            /* Bela boja teksta */
-            border: none;
-            border-radius: 50%;
-            /* Kružni oblik */
-            width: 40px;
-            /* Širina */
-            height: 40px;
-            /* Visina */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            /* Veličina fonta ikonice */
-            position: absolute;
-            /* Apsolutno pozicioniranje */
-            right: 10px;
-            /* Od desne ivice */
-            top: 10px;
-            /* Od vrha */
-        }
-
-        /* Prilagođavanje pozicije kada je navigacija proširena */
-        .bg-primary.expanded {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1050;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            /* Omogući skrolovanje ako sadržaj premašuje visinu ekrana */
-        }
-
-        .main-content.hidden {
-            display: none;
-            /* Sakrij main-content kada je bg-primary proširen */
-        }
-
-
-        @media (min-width: 768px) {
-            .toggle-nav {
-                display: none;
-            }
-        }
     </style>
 </head>
 
@@ -577,20 +469,23 @@
                                 <a href="#contact" class="nav-link">Kontakt</a>
                                 <a href="#faq" class="nav-link">FAQ</a>
                             </nav>
-
-                            <!-- Socijalne ikonice -->
-                            <div class="social-icons">
-                                <a href="#" class="fab fa-facebook"></a>
-                                <a href="#" class="fab fa-instagram"></a>
-                                <a href="#" class="fab fa-twitter"></a>
-                                <a href="#" class="fab fa-tiktok"></a>
-                                <a href="#" class="fas fa-phone-alt"></a> <!-- Ikonica za telefon -->
-                                <a href="#" class="fab fa-viber"></a> <!-- Ikonica za Viber -->
-                                <a href="#" class="fab fa-whatsapp"></a> <!-- Ikonica za WhatsApp -->
-                                <a href="#" class="fab fa-facebook-messenger"></a> <!-- Ikonica za Messenger -->
+                        </div>
+                    </div>
+                    <div class="social-right">
 
 
-                            </div>
+                        <!-- Socijalne ikonice -->
+                        <div class="social-icons">
+                            <a href="#" class="fab fa-facebook"></a>
+                            <a href="#" class="fab fa-instagram"></a>
+                            <a href="#" class="fab fa-twitter"></a>
+                            <a href="#" class="fab fa-tiktok"></a>
+                            <a href="#" class="fas fa-phone-alt"></a> <!-- Ikonica za telefon -->
+                            <a href="#" class="fab fa-viber"></a> <!-- Ikonica za Viber -->
+                            <a href="#" class="fab fa-whatsapp"></a> <!-- Ikonica za WhatsApp -->
+                            <a href="#" class="fab fa-facebook-messenger"></a> <!-- Ikonica za Messenger -->
+
+
                         </div>
                     </div>
                 </div>
@@ -600,8 +495,6 @@
                 <div class="cta-buttons mt-4 d-flex gap-2">
                     <button class="btn btn-warning flex-grow-1">Zakaži konsultaciju</button>
                     <button class="btn btn-outline-light flex-grow-1">Kontaktiraj nas</button>
-                    <button class="toggle-nav"><i class="fas fa-bars"></i></button>
-                    <!-- Promena za prikaz ikonice sendviča -->
                 </div>
             </div>
 
@@ -778,40 +671,6 @@
                 event.currentTarget.classList.add('hidden');
             }
         });
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggleNavButton = document.querySelector('.toggle-nav');
-            if (toggleNavButton && window.matchMedia("(max-width: 767px)").matches) { // Dodaj event listener samo za mobilne uređaje
-                toggleNavButton.addEventListener('click', () => {
-                    const navElement = document.querySelector('.nav');
-                    const bgPrimary = document.querySelector('.bg-primary');
-                    navElement.classList.toggle('expanded');
-                    bgPrimary.classList.toggle('expanded'); // Ovo možemo koristiti za proširivanje celog sidebara ako je potrebno
-                });
-            }
-        });
-
-
-        window.addEventListener('resize', updateSidebarHeight);
-        window.addEventListener('load', updateSidebarHeight);
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const toggleNavButton = document.querySelector('.toggle-nav');
-            if (toggleNavButton && window.matchMedia("(max-width: 767px)").matches) { // Dodaj event listener samo za mobilne uređaje
-                toggleNavButton.addEventListener('click', () => {
-                    const navElement = document.querySelector('.nav');
-                    const bgPrimary = document.querySelector('.bg-primary');
-                    const mainContent = document.querySelector('.main-content');
-                    navElement.classList.toggle('expanded');
-                    bgPrimary.classList.toggle('expanded');
-                    mainContent.classList.toggle('hidden'); // Toggle klase za sakrivanje main-content
-                });
-            }
-        });
-
-
-
 
 
 
